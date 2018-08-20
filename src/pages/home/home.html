@@ -1,17 +1,35 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-card class="holli-day-firm-card">
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-</ion-content>
+  <ion-card-header class="holli-day-firm-header">
+    Firm Holiday
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-scroll class="holli-day-firm-scroll" [style.minHeight]="showViewMoreButton?'220px':'60vh'" scrollY="true">
+      <ion-list>
+        <ion-list-header class="holli-day-firm-list-heading">UPCOMING</ion-list-header>
+        <button class="holli-day-firm-list-item" ion-item *ngFor="let item of getMinimumList();let _index = index;" [style.borderBottomWidth]="(_index==(noOfItemsToView-1))?'0px':'1px'">
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.date }}</p>
+        </button>
+        <ion-list-header class="holli-day-firm-list-heading" *ngIf="!showViewMoreButton">PASSED</ion-list-header>
+        <button class="holli-day-firm-list-item" ion-item *ngFor="let item of getPassedList();let _index = index;" [style.borderBottomWidth]="(_index==(noOfItemsToView-1))?'0px':'1px'">
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.date }}</p>
+        </button>
+      </ion-list>
+    </ion-scroll>
+    <button class="holli-day-firm-view-more-button" ion-button *ngIf="showViewMoreButton" (click)="showAllItems()" color="danger" clear>View More
+    </button>
+
+  </ion-card-content>
+
+</ion-card>
+
+<div>
+  <label class="holli-day-firm-help-text">WAS THIS HELPFUL?</label>
+  <label class="holli-day-firm-help-button">Yes</label>
+  <label class="holli-day-firm-help-label">|</label>
+  <label class="holli-day-firm-help-button">No</label>
+  <div  class="holli-day-firm-clear-fix" style="clear: both;"></div>
+</div>
